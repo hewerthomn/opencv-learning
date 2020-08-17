@@ -1,29 +1,32 @@
-import cv2
+import cv2 as cv
+import numpy as np
 
 def detectFace():
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-    cam = cv2.VideoCapture(0)
+    cam = cv.VideoCapture(0)
     if cam.isOpened():
         while True:
             _, frame = cam.read()
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
             for (x,y,w,h) in faces:
-                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                cv.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
                 roi_gray = gray[y:y+h, x:x+w]
                 roi_color = frame[y:y+h, x:x+w]
 
-                # cv2.imshow('roi gray', roi_gray)
+                # cv.imshow('roi gray', roi_gray)
 
-            frame = cv2.flip(frame, 1)
-            cv2.imshow('My Face Detection', frame)
+            frame = cv.flip(frame, 1)
+            cv.imshow('My Face Detection', frame)
 
-            if cv2.waitKey(1) == 27:
+            if cv.waitKey(1) == 27:
                 break # Esc to quit
+        cam.release()
+        cv.destroyAllWindows()
     else:
         print('Not connected to webcam...')
 
