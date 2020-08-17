@@ -23,7 +23,7 @@ def showWebcam(cv2, mirror=False):
         print("Not connected to webcam")
 
 def main():
-    showWebcam(cv2, mirror=True)
+    showWebcam(cv2, mirror=False)
 
 if __name__ == '__main__':
     main()
