@@ -2,6 +2,7 @@ import numpy as np
 import cv2 as cv
 
 cap = cv.VideoCapture(0)
+
 width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH) + 0.5)
 height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT) + 0.5)
 size = (width, height)
